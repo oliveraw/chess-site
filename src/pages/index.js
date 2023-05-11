@@ -43,14 +43,16 @@ import { Chess } from "chess.js";
 // }
 
 function History({ onHistoryClick, verboseHistory }) {
-    console.log('history', verboseHistory)
-    const items = verboseHistory.map((item) => {
-        <li onClick={() => onHistoryClick(item.after)}>item.to</li>
+    const items = verboseHistory.map((item, idx) => {
+        const style = 'rounded-lg px-4 py-2 my-1 '
+        const color = item.color === 'w' ? 'outline outline-black' : 'bg-black text-white'
+        return <button class={style + color} onClick={() => onHistoryClick(idx)} key={idx}>{item.to}</button>
     })
     return (
-        <ul class='flex flex-row'>
+        <div class='flex flex-row flex-nowrap h-full w-full gap-x-2 mt-4 overflow-auto'>
+            <button class='bg-gray-100 hover:bg-gray-200 rounded-lg px-4 py-2 my-1' onClick={() => onHistoryClick(-1)}>Restart</button>
             {items}
-        </ul>
+        </div>
     )
 }
 
@@ -65,7 +67,15 @@ export default function Home() {
         setFen(game.fen())
     }
 
-    function onHistoryClick(fen) {
+    function onHistoryClick(idx) {
+        // if resetting game
+        if (idx === -1) { game.reset() }
+        // normal revert move
+        else {
+            while (game.history().length !== idx+1) {
+                game.undo()
+            }
+        }
         setFen(game.fen())
     }
 
@@ -81,7 +91,9 @@ export default function Home() {
             >
                 Next random move
             </button>
-            <History onHistoryClick={(fen) => {onHistoryClick(fen)}} verboseHistory={game.history({ verbose: true })}/>
+            <div class='w-1/3'>
+                <History onHistoryClick={(fen) => {onHistoryClick(fen)}} verboseHistory={game.history({ verbose: true })}/>
+            </div>
         </div>
     );
 }
