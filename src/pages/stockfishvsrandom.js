@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { getStockfishMove } from '@/utils/stockfishMove';
 
-export default function Profile() {
+export default function Stockfish() {
     const [data, setData] = useState(null);
     const [isLoading, setLoading] = useState(false);
 
@@ -26,8 +27,8 @@ export default function Profile() {
 
     return (
         <div>
-            <h1>{data.name}</h1>
-            <p>{data.about}</p>
+            {/* <h1>{data.name}</h1>
+            <p>{data.about}</p> */}
             <p>{data.move}</p>
         </div>
     );
