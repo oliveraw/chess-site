@@ -12,6 +12,12 @@ export default function Index() {
                 >
                     Random vs. Random
                 </button>
+                <button 
+                    class='bg-orange-600 hover:bg-orange-700 outline outline-orange-800 text-white px-4 py-2 rounded-lg'
+                    onClick={() => {router.push('/randomvsstockfish')}}
+                >
+                    Random vs. Stockfish
+                </button>
             </div>
         </div>
     )

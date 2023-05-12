@@ -44,7 +44,6 @@ export default function Home() {
             <div class='text-3xl font-bold mt-8'>Random Move vs. Random Move</div>
             <div class='w-1/3 h-1/3'>
                 <Chessboard position={fen}/>
-                {/* <PlayRandomMoveEngine /> */}
             </div>
             <div class='w-1/3 overflow-auto'>
                 <History onHistoryClick={(fen) => {onHistoryClick(fen)}} verboseHistory={game.history({ verbose: true })}/>
